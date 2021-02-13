@@ -4,7 +4,7 @@ import * as ReactDOM from "react-dom";
 import { Machine, assign, send, State } from "xstate";
 import { useMachine, asEffect } from "@xstate/react";
 import { inspect } from "@xstate/inspect";
-import { dmMachine } from "./dmColourChanger";
+import { dmMachine } from "./dmAppointment";
 
 
 inspect({
@@ -30,7 +30,10 @@ const machine = Machine<SDSContext, any, SDSEvent>({
                         LISTEN: 'recognising',
                         SPEAK: {
                             target: 'speaking',
-                            actions: assign((_context, event) => { return { ttsAgenda: event.value } })
+                            actions: assign((_context, event) => {
+                                console.log('I was triggered during LISTEN')
+                                return { ttsAgenda: event.value } 
+                            })
                         }
                     }
                 },

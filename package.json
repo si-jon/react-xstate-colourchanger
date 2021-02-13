@@ -1,5 +1,5 @@
 {
-  "homepage": "https://vladmaraev.github.io/react-xstate-colourchanger",
+  "homepage": "https://si-jon.github.io/react-xstate-colourchanger",
   "name": "xstate-react-typescript-template",
   "version": "1.0.0",
   "description": "",
@@ -25,7 +25,7 @@
     "typescript": "3.3.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "BROWSER='firefox-trunk' react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
