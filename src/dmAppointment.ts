@@ -76,15 +76,10 @@ const grammar_2: { [index: string]: {  } } = {
 }
 
 
-export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
+export const dmAppointmentMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
     initial: 'init',
     states: {
         init: {
-            on: {
-                CLICK: 'welcome'
-            }
-        },
-        welcome: {
             initial: "prompt",
             on: { ENDSPEECH: "who" },
             states: {
@@ -278,7 +273,7 @@ export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
         },
         appointment_created: {
             entry: say("Your appointment has been created!"),
-            always: 'init'
+            type: 'final'
         }
     }
 })

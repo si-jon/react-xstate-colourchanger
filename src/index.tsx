@@ -4,7 +4,8 @@ import * as ReactDOM from "react-dom";
 import { Machine, assign, send, State } from "xstate";
 import { useMachine, asEffect } from "@xstate/react";
 import { inspect } from "@xstate/inspect";
-import { dmMachine } from "./dmAppointment";
+import { dmMachine } from "./dmMain";
+import { dmRasaQueryMachine } from "./dmRasaQuery";
 
 
 inspect({
@@ -19,8 +20,11 @@ const machine = Machine<SDSContext, any, SDSEvent>({
     id: 'root',
     type: 'parallel',
     states: {
-        dm: {
-            ...dmMachine
+        dmMain: {
+            ...dmMachine,
+        },
+        dmRasaQuery: {
+            ...dmRasaQueryMachine,
         },
         asrtts: {
             initial: 'idle',
@@ -125,7 +129,7 @@ function App() {
         devTools: true,
         actions: {
             recStart: asEffect(() => {
-                console.log('Ready to receive a color command.');
+                console.log('Listening.');
                 listen({
                     interimResults: false,
                     continuous: true
@@ -161,20 +165,6 @@ function App() {
         </div>
     )
 };
-
-
-
-/* RASA API
- *  */
-const proxyurl = "https://cors-anywhere.herokuapp.com/";
-const rasaurl = 'https://rasa-nlu-api-00.herokuapp.com/model/parse'
-const nluRequest = (text: string) =>
-    fetch(new Request(proxyurl + rasaurl, {
-        method: 'POST',
-        headers: { 'Origin': 'http://maraev.me' }, // only required with proxy
-        body: `{"text": "${text}"}`
-    }))
-        .then(data => data.json());
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
