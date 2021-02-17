@@ -32,7 +32,7 @@ export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
             initial: 'prompt',
             states: {
                 prompt: {
-                    entry: say("What do you want to do?"),
+                    entry: say("Hi! What do you want me to do?"),
                     on: { ENDSPEECH: 'ask' }
                 },
                 ask: {
@@ -77,11 +77,11 @@ export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
             }
         },
         dmTodo: {
-            entry: say("To do!"),
+            entry: say("Let's create a to-do item!"),
             on: { ENDSPEECH: 'init' }
         },
         dmTimer: {
-            entry: say("Timer!"),
+            entry: say("Let's set a timer!"),
             on: { ENDSPEECH: 'init' }
         },
     },
