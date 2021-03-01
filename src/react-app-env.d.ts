@@ -10,6 +10,7 @@ interface SDSContext {
     day: string;
     time: string;
     query: string;
+    snippet: string
 }
 
 type SDSEvent =
