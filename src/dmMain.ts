@@ -1,5 +1,7 @@
 import { MachineConfig, send, Action, assign } from "xstate";
 import { dmAppointmentMachine } from "./dmAppointment";
+import { dmColourChangerMachine } from "./dmColourChanger";
+import { dmSmartHomeMachine } from "./dmSmartHome";
 
 function say(text: string): Action<SDSContext, SDSEvent> {
     return send((_context: SDSContext) => ({ type: "SPEAK", value: text }))
@@ -55,7 +57,15 @@ export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
                         cond: (context, event) => event.value === "timer",
                         target: 'dmTimer'
                     },
-                    { target: "nomatch" }
+                    {
+                        cond: (context, event) => event.value === "change_colour",
+                        target: 'dmColourChanger'
+                    },
+                    {
+                        cond: (context, event) => event.value === "smart_home",
+                        target: 'dmSmartHome'
+                    },
+                    { target: 'nomatch' }
                 ],
                 RESPONSE_ERROR: {
                     target: 'error'
@@ -83,6 +93,18 @@ export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
         dmTimer: {
             entry: say("Let's set a timer!"),
             on: { ENDSPEECH: 'init' }
+        },
+        dmColourChanger: {
+            ...dmColourChangerMachine,
+            onDone: {
+                target: 'init' 
+            }
+        },
+        dmSmartHome: {
+            ...dmSmartHomeMachine,
+            onDone: {
+                target: 'init' 
+            }
         },
     },
 })
