@@ -8,6 +8,7 @@ interface SDSContext {
     ttsAgenda: string;
     person: string;
     day: string;
+    wholeDay: bool;
     time: string;
     query: string;
     snippet: string

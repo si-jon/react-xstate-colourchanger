@@ -108,6 +108,14 @@ const ReactiveButton = (props: Props): JSX.Element => {
                     Speaking...
                 </button>
             );
+        case props.state.matches({ dmRasaQuery: 'query' }):
+            console.log('Waiting for rasa result')
+            return (
+                <button type="button" className="glow-on-hover"
+                    style={{ animation: "glowing 60s linear" }} {...props}>
+                    Waiting...
+                </button>
+            );
         default:
             return (
                 <button type="button" className="glow-on-hover" {...props}>
