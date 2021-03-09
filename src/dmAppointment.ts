@@ -281,7 +281,7 @@ export const dmAppointmentMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
                         },
                         {
                             cond: (context) => yes_no_grammar[context.recResult] === true,
-                            target: "appointment_created",
+                            target: "#appointment_created",
                         },
                         {
                             cond: (context) => yes_no_grammar[context.recResult] === false,
@@ -290,10 +290,6 @@ export const dmAppointmentMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
                         { target: ".promptAndAsk.nomatch" }],
                         TIMER: ".promptAndAsk.repromptCounter"
                     },
-                },
-                appointment_created: {
-                    entry: say("Your appointment has been created!"),
-                    type: "final"
                 },
                 hist: {
                     type: "history",
@@ -313,6 +309,11 @@ export const dmAppointmentMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
         giveup: {
             id: "giveup",
             entry: say("Bye bye!"),
+            type: "final"
+        },
+        appointment_created: {
+            id: "appointment_created",
+            entry: say("Your appointment has been created!"),
             type: "final"
         }
     }
