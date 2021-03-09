@@ -1,7 +1,7 @@
 import { MachineConfig, send, assign, Action } from "xstate";
 
 const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-const rasaurl = 'https://si-jon-dialogue-management.herokuapp.com/model/parse'
+const rasaurl = 'https://si-jon-nlu-app.herokuapp.com/model/parse'
 const nluRequest = (text: string) =>
     fetch(new Request(proxyurl + rasaurl, {
         method: 'POST',

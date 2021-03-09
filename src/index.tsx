@@ -51,7 +51,8 @@ const machine = Machine<SDSContext, any, SDSEvent>({
                                 assign((_context, event) => { return { recResult: event.value } })],
                             target: '.match'
                         },
-                        RECOGNISED: 'idle'
+                        RECOGNISED: 'idle',
+                        STOP_LISTEN: 'idle'
                     },
                     states: {
                         progress: {

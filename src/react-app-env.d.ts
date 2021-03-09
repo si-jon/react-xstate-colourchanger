@@ -11,7 +11,8 @@ interface SDSContext {
     wholeDay: bool;
     time: string;
     query: string;
-    snippet: string
+    snippet: string;
+    repromptCount: integer;
 }
 
 type SDSEvent =
@@ -20,7 +21,9 @@ type SDSEvent =
     | { type: 'ASRRESULT', value: string }
     | { type: 'ENDSPEECH' }
     | { type: 'LISTEN' }
+    | { type: 'STOP_LISTEN' }
     | { type: 'SPEAK', value: string }
     | { type: 'QUERY', value: string }
     | { type: 'RESPONSE', value: string }
-    | { type: 'RESPONSE_ERROR', value: string };
+    | { type: 'RESPONSE_ERROR', value: string }
+    | { type: 'TIMER' };
